@@ -1,0 +1,7 @@
+package uniqueproject.uz.go2uz.exception;
+
+public class DataAlreadyExistsException extends RuntimeException {
+    public DataAlreadyExistsException(String msg) {
+        super(msg);
+    }
+}
