@@ -12,9 +12,11 @@ import java.util.List;
 
 public class Agency extends BaseEntity {
     private String name;
+
     @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY) //
     private List<Tour> tours;
    // @ManyToMany(fetch = FetchType.EAGER)
+
    @ElementCollection(targetClass = ServiceType.class, fetch = FetchType.EAGER)
    @JoinTable(name = "agency_service_types",
            joinColumns = @JoinColumn(name = "agency_id"))
