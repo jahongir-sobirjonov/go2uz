@@ -11,6 +11,7 @@ import java.util.List;
 @Builder
 
 public class Agency extends BaseEntity {
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY) //
