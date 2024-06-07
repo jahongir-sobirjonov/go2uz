@@ -1,12 +1,8 @@
 package uniqueproject.uz.go2uz.entity;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
-
+import uniqueproject.uz.go2uz.entity.enums.ServiceType;
 import java.util.List;
-
 @Entity(name = "agencies")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,9 +12,14 @@ import java.util.List;
 
 public class Agency extends BaseEntity {
     private String name;
-
     @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY) //
     private List<Tour> tours;
+   // @ManyToMany(fetch = FetchType.EAGER)
+   @ElementCollection(targetClass = ServiceType.class, fetch = FetchType.EAGER)
+   @JoinTable(name = "agency_service_types",
+           joinColumns = @JoinColumn(name = "agency_id"))
+   @Enumerated(EnumType.STRING)
+    private List<ServiceType> serviceTypes;
 
     private Integer countOfOrders;
     private Integer rating;
