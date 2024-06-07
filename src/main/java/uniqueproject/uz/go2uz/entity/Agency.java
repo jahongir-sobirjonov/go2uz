@@ -13,10 +13,11 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+
 public class Agency extends BaseEntity {
     private String name;
 
-    @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY) //
     private List<Tour> tours;
 
     private Integer countOfOrders;
