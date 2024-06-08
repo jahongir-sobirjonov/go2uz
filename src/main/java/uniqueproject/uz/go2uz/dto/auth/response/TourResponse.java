@@ -2,7 +2,7 @@ package uniqueproject.uz.go2uz.dto.auth.response;
 
 import lombok.*;
 import uniqueproject.uz.go2uz.entity.enums.TourCategory;
-
+import java.util.UUID;
 import java.time.LocalDate;
 import java.util.List;
 @AllArgsConstructor
@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @Builder
 public class TourResponse {
+    private UUID id;
     private String title;
     private String description; //  joy haqida description
     private List<String> pictures; // rasmlar pathi

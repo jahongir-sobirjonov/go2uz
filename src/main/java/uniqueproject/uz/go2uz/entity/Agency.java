@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import uniqueproject.uz.go2uz.entity.enums.ServiceType;
 import java.util.List;
+import java.util.UUID;
+
 @Entity(name = "agencies")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,6 +13,7 @@ import java.util.List;
 @Builder
 
 public class Agency extends BaseEntity {
+    private UUID ownerId;
     @Column(unique = true)
     private String name;
 

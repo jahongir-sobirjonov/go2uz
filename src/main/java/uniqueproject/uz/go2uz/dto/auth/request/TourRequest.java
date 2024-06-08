@@ -7,7 +7,7 @@ import lombok.*;
 import uniqueproject.uz.go2uz.dto.auth.response.TourResponse;
 import uniqueproject.uz.go2uz.entity.Agency;
 import uniqueproject.uz.go2uz.entity.enums.TourCategory;
-
+import java.util.UUID;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +17,7 @@ import java.util.List;
 @Setter
 @Builder
 public class TourRequest {
+    private UUID agencyId;
     private String title;
     private String description; //  joy haqida description
     private List<String> pictures; // rasmlar pathi
