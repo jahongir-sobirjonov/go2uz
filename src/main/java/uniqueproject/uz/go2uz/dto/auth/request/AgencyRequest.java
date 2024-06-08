@@ -4,10 +4,10 @@ import uniqueproject.uz.go2uz.entity.Tour;
 import uniqueproject.uz.go2uz.entity.enums.ServiceType;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class AgencyRequest {
     private String name;

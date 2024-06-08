@@ -7,6 +7,7 @@ import uniqueproject.uz.go2uz.entity.Tour;
 import uniqueproject.uz.go2uz.entity.enums.ServiceType;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,9 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class AgencyResponse {
+    private UUID id;
     private String name;
     private List<Tour> tours;
     private List<ServiceType> serviceTypes;
     private Integer countOfOrders;
     private Integer rating;
 }
+
+

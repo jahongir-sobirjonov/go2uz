@@ -19,9 +19,10 @@ import java.util.UUID;
 public class TourController {
     private final TourService tourService;
 
-    @PostMapping("/add-tour{id}")
-    public ResponseEntity<TourResponse> addTour(@PathVariable UUID id, @RequestBody TourRequest tourRequest) {
-        return ResponseEntity.status(200).body(tourService.addTourToAgency(id,tourRequest));
+    @PostMapping("/add-tour")
+    public ResponseEntity<TourResponse> addTour(@RequestBody TourRequest tourRequest) {
+        TourResponse tourResponse = tourService.addTourToAgency(tourRequest.getAgencyId(), tourRequest);
+        return ResponseEntity.status(200).body(tourResponse);
     }
 
 
