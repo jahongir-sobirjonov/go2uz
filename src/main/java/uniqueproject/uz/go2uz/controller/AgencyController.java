@@ -15,7 +15,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("agencies")
-public class AgencyController {
+public class AgencyController { // admin controller
     private final AgencyService agencyService;
 
    @GetMapping("/get{id}")

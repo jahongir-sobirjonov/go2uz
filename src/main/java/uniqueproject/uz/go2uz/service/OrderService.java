@@ -1,6 +1,8 @@
 package uniqueproject.uz.go2uz.service;
 
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 import uniqueproject.uz.go2uz.dto.auth.request.OrderRequest;
 import uniqueproject.uz.go2uz.dto.auth.response.OrderResponse;
 import uniqueproject.uz.go2uz.entity.Order;
@@ -13,7 +15,8 @@ import uniqueproject.uz.go2uz.repository.TourRepository;
 import uniqueproject.uz.go2uz.repository.UserRepository;
 
 import java.util.Date;
-
+@Service
+@RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
     private final TourRepository tourRepository;
