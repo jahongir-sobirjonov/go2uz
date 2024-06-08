@@ -27,4 +27,5 @@ public class AuthController {
     public ResponseEntity<UserResponse> me(Principal principal){
         return ResponseEntity.ok(userService.me(principal));
     }
+
 }
