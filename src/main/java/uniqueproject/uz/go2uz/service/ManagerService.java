@@ -1,5 +1,7 @@
 package uniqueproject.uz.go2uz.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import uniqueproject.uz.go2uz.dto.auth.response.OrderResponse;
 import uniqueproject.uz.go2uz.entity.Order;
 import uniqueproject.uz.go2uz.entity.enums.OrderStatus;
@@ -9,7 +11,8 @@ import uniqueproject.uz.go2uz.repository.OrderRepository;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
+@Service
+@RequiredArgsConstructor
 public class ManagerService {
     private final OrderRepository orderRepository;
 

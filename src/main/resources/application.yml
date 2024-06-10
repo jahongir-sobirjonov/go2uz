@@ -12,7 +12,17 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
         format_sql: true
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: coursemanagmentt@gmail.com
+    password: rmtdqcbpmqabptsc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 springdoc:
   api-docs:
@@ -25,3 +35,7 @@ springdoc:
     operations-sorter: alpha
     disable-swagger-default-url: true
     doc-expansion: none
+
+jwt:
+  expiry: 90000000
+  secret: gjhkoiutrefdsavzbxcnmktjyhretgwedfvbnjkrjyerhsfg

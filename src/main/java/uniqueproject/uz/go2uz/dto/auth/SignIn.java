@@ -4,9 +4,11 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter@Setter
+@Getter
+@Setter
 @Builder
 public class SignIn {
     private String email;
     private String password;
+    private boolean rememberMe;
 }
