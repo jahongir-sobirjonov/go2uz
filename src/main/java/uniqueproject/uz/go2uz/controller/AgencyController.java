@@ -2,6 +2,7 @@ package uniqueproject.uz.go2uz.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 import uniqueproject.uz.go2uz.dto.auth.response.AgencyResponse;
@@ -23,6 +24,7 @@ public class AgencyController { // admin controller
        return agencyService.getById(id);
    }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
     @GetMapping("/user-agencies")
     public ResponseEntity<List<AgencyResponse>> getUserAgencies(@RequestParam UUID userId) {
         List<AgencyResponse> agencies = agencyService.getAgenciesByUserId(userId);

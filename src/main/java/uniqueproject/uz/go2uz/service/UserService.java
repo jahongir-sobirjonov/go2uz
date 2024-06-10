@@ -59,4 +59,10 @@ public class UserService {
 
         return (T) modelMapper.map(userEntity,UserResponse.class);
     }
+
+    public Object getUserProfile(Principal principal) {
+               UserEntity user = userRepository.findByEmail(principal.getName()).orElseThrow(() -> new DataNotFoundException("User not found!"));
+
+        return user;
+    }
 }
