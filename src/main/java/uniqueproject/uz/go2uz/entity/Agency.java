@@ -15,6 +15,7 @@ import java.util.UUID;
 public class Agency extends BaseEntity {
     private UUID ownerId;
     @Column(unique = true)
+
     private String name;
 
     @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY) //

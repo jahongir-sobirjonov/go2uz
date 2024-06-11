@@ -4,14 +4,18 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
+import uniqueproject.uz.go2uz.dto.auth.request.AgencyRequest;
 import uniqueproject.uz.go2uz.dto.auth.response.AgencyResponse;
+import uniqueproject.uz.go2uz.dto.auth.response.TourResponse;
 import uniqueproject.uz.go2uz.entity.Agency;
+import uniqueproject.uz.go2uz.entity.enums.ServiceType;
+import uniqueproject.uz.go2uz.exception.DataAlreadyExistsException;
+import uniqueproject.uz.go2uz.exception.DataNotFoundException;
 import uniqueproject.uz.go2uz.repository.AgencyRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +37,30 @@ public class AgencyService {
 //                agency.getRating()
 //        )).collect(Collectors.toList());
         List<Agency> byOwnerId = agencyRepository.findByOwnerId(adminId);
-        return modelMapper.map(byOwnerId, new TypeToken<List<AgencyResponse>>() {}.getType());
+        return modelMapper.map(byOwnerId, new TypeToken<List<AgencyResponse>>() {
+        }.getType());
+    }
+
+    public AgencyResponse createAgency(AgencyRequest agencyRequest, List<ServiceType> serviceTypes, UUID ownerId) {
+        if (agencyRepository.existsByName(agencyRequest.getName())) {
+            throw new DataAlreadyExistsException("Agency already exists with this name : " + agencyRequest.getName());
+        }
+        Agency agency = modelMapper.map(agencyRequest, Agency.class);
+        agency.setCountOfOrders(0);
+        agency.setRating(0);
+        agency.setOwnerId(ownerId);
+        agency.setServiceTypes(serviceTypes);
+        agencyRepository.save(agency);
+
+        return AgencyResponse.builder()
+                .id(agency.getId())
+                .name(agency.getName())
+//                .tours(modelMapper.map(agency.getTours(), new TypeToken<List<AgencyResponse>>() {
+//                }.getType()))
+                .serviceTypes(agency.getServiceTypes())
+                .countOfOrders(agency.getCountOfOrders())
+                .rating(agency.getRating())
+                .build();
+
     }
 }
