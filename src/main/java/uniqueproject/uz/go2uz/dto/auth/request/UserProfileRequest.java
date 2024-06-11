@@ -15,6 +15,5 @@ public class UserProfileRequest {
     private String phoneNumber;
     private String telegramUsername;
     private String profilePhoto;
-    private String currentPassword;
-    private String newPassword;
+
 }

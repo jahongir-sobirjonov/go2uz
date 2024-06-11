@@ -28,11 +28,11 @@ public class AuthController {
         return ResponseEntity.ok().body(authService.addUser(signUp, userType));
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<UserResponse> me(Principal principal){
-
-        return ResponseEntity.ok(userService.me(principal));
-    }
+//    @GetMapping("/me")
+//    public ResponseEntity<UserResponse> me(Principal principal){
+//
+//        return ResponseEntity.ok(userService.me(principal));
+//    }
 
     @PermitAll
     @PostMapping("/sign-in")
@@ -40,9 +40,4 @@ public class AuthController {
         return authService.signIn(dto);
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<JwtResponse> authenticateUser(@RequestBody SignIn loginRequest) {
-//        JwtResponse authResponse = authService.authenticateUser(loginRequest);
-//        return ResponseEntity.ok(authResponse);
-//    }
 }

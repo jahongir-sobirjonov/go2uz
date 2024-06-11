@@ -27,13 +27,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    public UserResponse updateUser(UUID userId, UserRole role) {
+    public UserResponse updateUserRole(UUID userId, UserRole role) {
             UserEntity user = userRepository.findById(userId)
                     .orElseThrow(() -> new DataNotFoundException("User not found"));
             user.setRole(role);
             UserEntity updatedUserEntity = userRepository.save(user);
            return modelMapper.map(updatedUserEntity, UserResponse.class);
         }
+
 
     public  <T> T me(Principal principal) {
         UserEntity userEntity = userRepository.findById(UUID.fromString(principal.getName()))
@@ -60,9 +61,5 @@ public class UserService {
         return (T) modelMapper.map(userEntity,UserResponse.class);
     }
 
-    public Object getUserProfile(Principal principal) {
-               UserEntity user = userRepository.findByEmail(principal.getName()).orElseThrow(() -> new DataNotFoundException("User not found!"));
 
-        return user;
-    }
 }

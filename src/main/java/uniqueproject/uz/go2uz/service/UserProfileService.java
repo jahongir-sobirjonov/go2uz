@@ -39,10 +39,10 @@ public class UserProfileService {
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
 
-        // Check if the current password matches the user's password
-        if (!passwordEncoder.matches(profileRequest.getCurrentPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid current password");
-        }
+//        // Check if the current password matches the user's password
+//        if (!passwordEncoder.matches(profileRequest.getCurrentPassword(), user.getPassword())) {
+//            throw new IllegalArgumentException("Invalid current password");
+//        }
 
         // Update user profile information
         user.setName(profileRequest.getName());
@@ -53,10 +53,10 @@ public class UserProfileService {
         user.setTelegramUsername(profileRequest.getTelegramUsername());
         user.setProfilePhoto(profileRequest.getProfilePhoto());
 
-        // If a new password is provided, update the password
-        if (profileRequest.getNewPassword() != null && !profileRequest.getNewPassword().isEmpty()) {
-            user.setPassword(passwordEncoder.encode(profileRequest.getNewPassword()));
-        }
+//        // If a new password is provided, update the password
+//        if (profileRequest.getNewPassword() != null && !profileRequest.getNewPassword().isEmpty()) {
+//            user.setPassword(passwordEncoder.encode(profileRequest.getNewPassword()));
+//        }
 
         // Save the updated user entity
         UserEntity updatedUser = userRepository.save(user);
