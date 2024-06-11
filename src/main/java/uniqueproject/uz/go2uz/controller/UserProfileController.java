@@ -26,43 +26,14 @@ public class UserProfileController {
     private final PasswordEncoder passwordEncoder;
     private final UserProfileService userProfileService;
 
-    @GetMapping
+    @GetMapping("/me")
     public ResponseEntity<?> getUserProfile(Principal principal) {
 
         return ResponseEntity.ok(userProfileService.getUserProfile(UUID.fromString(principal.getName())));
     }
 
-    @PutMapping
+    @PutMapping("/update-profile")
     public ResponseEntity<?> updateUserProfile(@RequestBody UserProfileRequest updatedUser, Principal principal) {
-//        UserEntity user = userRepository.findByEmail(principal.getName()).orElse(null);
-//        if (user == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        user.setName(updatedUser.getName());
-//        user.setSurname(updatedUser.getSurname());
-//        user.setCity(updatedUser.getCity());
-//        user.setEmail(updatedUser.getEmail());
-//        user.setPhoneNumber(updatedUser.getPhoneNumber());
-//        user.setProfilePhoto(updatedUser.getProfilePhoto());
-//        user.setTelegramUsername(updatedUser.getTelegramUsername());
-//        userRepository.save(user);
-//
-//        return ResponseEntity.ok("User updated successfully");
         return ResponseEntity.ok(userProfileService.updateUserProfile(UUID.fromString(principal.getName()), updatedUser));
-    }
-
-    @PutMapping("/change-password")
-    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest, Principal principal) {
-//        UserEntity user = userRepository.findByEmail(principal.getName()).orElse(null);
-//        if (user == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        user.setPassword(passwordEncoder.encode(changePasswordRequest.getNewPassword()));
-//        userRepository.save(user);
-//
-        return ResponseEntity.ok("Password changed successfully");
-//        return ResponseEntity.ok(userProfileService.changePassword(changePasswordRequest, principal));
     }
 }

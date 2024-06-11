@@ -22,16 +22,12 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
 
-//    @PatchMapping
-//    public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity
-//                                                             user) {
-//
-//    }
+
     @PutMapping("/update-user-role/{userId}/role")
-    public ResponseEntity<UserResponse> updateUser(
+    public ResponseEntity<UserResponse> updateUserRole(
             @PathVariable UUID userId,
             @RequestParam UserRole role) {
-        UserResponse userResponse = userService.updateUser(userId, role);
+        UserResponse userResponse = userService.updateUserRole(userId, role);
         return ResponseEntity.ok(userResponse);
     }
 

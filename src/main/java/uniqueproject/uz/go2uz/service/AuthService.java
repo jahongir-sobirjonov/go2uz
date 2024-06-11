@@ -17,6 +17,7 @@ import uniqueproject.uz.go2uz.exception.DataNotFoundException;
 import uniqueproject.uz.go2uz.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -50,26 +51,15 @@ public class AuthService {
         return "User successfully registered";
     }
 
-//    public JwtResponse authenticateUser(SignIn loginRequest) {
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        loginRequest.getEmail(),
-//                        loginRequest.getPassword()
-//                )
-//        );
-//
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//        String jwt = tokenProvider.generateToken(authentication);
-//
-//        return new JwtResponse(jwt);
-//    }
 
     public JwtResponse signIn(AuthDto dto) {
-        UserEntity user = userRepository.findByEmail(dto.getEmail()).orElseThrow(() -> new DataNotFoundException("user not found"));
-        if (dto.getPassword().equals(user.getPassword())) {
+        UserEntity user = userRepository.findByEmail(dto.getEmail())
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+
+        if (passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             return new JwtResponse(jwtService.generateToken(user));
+        } else {
+            throw new AuthenticationCredentialsNotFoundException("Invalid credentials");
         }
-        throw new AuthenticationCredentialsNotFoundException("password didn't match");
     }
 }
