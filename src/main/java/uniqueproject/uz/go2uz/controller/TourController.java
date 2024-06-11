@@ -2,6 +2,7 @@ package uniqueproject.uz.go2uz.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import java.util.UUID;
 @RequestMapping("tours")
 public class TourController {
     private final TourService tourService;
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add-tour")
     public ResponseEntity<TourResponse> addTour(@RequestBody TourRequest tourRequest) {
         TourResponse tourResponse = tourService.addTourToAgency(tourRequest.getAgencyId(), tourRequest);

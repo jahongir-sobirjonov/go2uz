@@ -17,7 +17,7 @@ import java.util.UUID;
 public class AgencyResponse {
     private UUID id;
     private String name;
-    private List<Tour> tours;
+    private List<TourResponse> tours;
     private List<ServiceType> serviceTypes;
     private Integer countOfOrders;
     private Integer rating;

@@ -1,8 +1,5 @@
 package uniqueproject.uz.go2uz.entity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import uniqueproject.uz.go2uz.entity.enums.TourCategory;
 import java.time.LocalDate;
@@ -20,6 +17,8 @@ public class Tour extends BaseEntity {
     private Double cost; // narxi
     private LocalDate date; // sanasi
     private String location;
+
+    @Enumerated(EnumType.STRING)
     private TourCategory category;
 
     @ManyToOne(fetch = FetchType.LAZY)
