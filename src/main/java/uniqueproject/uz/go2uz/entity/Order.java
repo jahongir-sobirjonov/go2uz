@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import uniqueproject.uz.go2uz.entity.enums.OrderStatus;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(name = "orders")
@@ -25,5 +26,7 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    private Date orderDate;
+    private Integer numberOfSeats;
+
+    private LocalDate orderDate;
 }

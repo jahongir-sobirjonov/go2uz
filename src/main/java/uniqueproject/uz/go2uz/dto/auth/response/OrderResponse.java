@@ -1,6 +1,8 @@
 package uniqueproject.uz.go2uz.dto.auth.response;
 import lombok.*;
 import uniqueproject.uz.go2uz.entity.enums.OrderStatus;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 @Getter
@@ -13,5 +15,5 @@ public class OrderResponse {
     private UUID userId;
     private UUID tourId;
     private OrderStatus status;
-    private Date orderDate;
+    private LocalDate orderDate;
 }

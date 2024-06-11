@@ -9,12 +9,16 @@ import uniqueproject.uz.go2uz.entity.Order;
 import uniqueproject.uz.go2uz.entity.Tour;
 import uniqueproject.uz.go2uz.entity.UserEntity;
 import uniqueproject.uz.go2uz.entity.enums.OrderStatus;
+import uniqueproject.uz.go2uz.entity.enums.TourStatus;
 import uniqueproject.uz.go2uz.exception.DataNotFoundException;
 import uniqueproject.uz.go2uz.repository.OrderRepository;
 import uniqueproject.uz.go2uz.repository.TourRepository;
 import uniqueproject.uz.go2uz.repository.UserRepository;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -24,28 +28,63 @@ public class OrderService {
     private final ModelMapper modelMapper;
 
 
-    public OrderResponse createOrder(OrderRequest orderRequest) {
-        UserEntity user = userRepository.findById(orderRequest.getUserId())
-                .orElseThrow(() -> new DataNotFoundException("User not found"));
+//    public OrderResponse createOrder(OrderRequest orderRequest) {
+//        UserEntity user = userRepository.findById(orderRequest.getUserId())
+//                .orElseThrow(() -> new DataNotFoundException("User not found"));
+//
+//        Tour tour = tourRepository.findById(orderRequest.getTourId())
+//                .orElseThrow(() -> new DataNotFoundException("Tour not found"));
+//
+//        Order order = Order.builder()
+//                .user(user)
+//                .tour(tour)
+//                .status(OrderStatus.PENDING)
+//                .orderDate(new Date())
+//                .build();
+//
+//        Order savedOrder = orderRepository.save(order);
+//
+//        return OrderResponse.builder()
+//                .id(savedOrder.getId())
+//                .userId(savedOrder.getUser().getId())
+//                .tourId(savedOrder.getTour().getId())
+//                .status(savedOrder.getStatus())
+//                .orderDate(savedOrder.getOrderDate())
+//                .build();
+//    }
 
+    public String orderTour(OrderRequest orderRequest) {
         Tour tour = tourRepository.findById(orderRequest.getTourId())
-                .orElseThrow(() -> new DataNotFoundException("Tour not found"));
+                .orElseThrow(() -> new DataNotFoundException("Tour not found with id: " + orderRequest.getTourId()));
 
-        Order order = Order.builder()
-                .user(user)
-                .tour(tour)
-                .status(OrderStatus.PENDING)
-                .orderDate(new Date())
-                .build();
+        if (tour.getStatus() == TourStatus.CANCELLED) {
+            return "Trip is cancelled";
+        }
 
-        Order savedOrder = orderRepository.save(order);
+        if (tour.getAvailableSeats() < orderRequest.getNumberOfSeats()) {
+            return "Not enough available seats";
+        }
 
-        return OrderResponse.builder()
-                .id(savedOrder.getId())
-                .userId(savedOrder.getUser().getId())
-                .tourId(savedOrder.getTour().getId())
-                .status(savedOrder.getStatus())
-                .orderDate(savedOrder.getOrderDate())
-                .build();
+
+        UserEntity user = userRepository.findById(orderRequest.getUserId())
+                .orElseThrow(() -> new DataNotFoundException("User not found with id: " + orderRequest.getUserId()));
+
+            Order order = new Order();
+            order.setTour(tour);
+            order.setStatus(OrderStatus.PENDING);
+            order.setOrderDate(LocalDate.now());
+            order.setNumberOfSeats(orderRequest.getNumberOfSeats());
+            order.setUser(user);
+            orderRepository.save(order);
+
+        // Update available seats for the trip
+        tour.setAvailableSeats(tour.getAvailableSeats() - orderRequest.getNumberOfSeats());
+        if (tour.getAvailableSeats() == 0) {
+            tour.setStatus(TourStatus.FULL);
+        }
+        tourRepository.save(tour);
+
+        return "Order successful";
+
     }
 }

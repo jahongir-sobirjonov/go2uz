@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uniqueproject.uz.go2uz.dto.auth.request.OrderRequest;
 import uniqueproject.uz.go2uz.dto.auth.request.TourRequest;
+import uniqueproject.uz.go2uz.dto.auth.request.TourUpdateRequest;
 import uniqueproject.uz.go2uz.dto.auth.response.TourResponse;
 import uniqueproject.uz.go2uz.entity.Tour;
 import uniqueproject.uz.go2uz.service.TourService;
@@ -24,6 +26,13 @@ public class TourController {
     public ResponseEntity<TourResponse> addTour(@RequestBody TourRequest tourRequest) {
         TourResponse tourResponse = tourService.addTourToAgency(tourRequest.getAgencyId(), tourRequest);
         return ResponseEntity.status(200).body(tourResponse);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PatchMapping("/update-tour")
+    public ResponseEntity<String> updateTour(@RequestBody TourUpdateRequest tourUpdateRequest) {
+        return ResponseEntity.status(200).body(tourService.updateTour(tourUpdateRequest));
+
     }
 
 
