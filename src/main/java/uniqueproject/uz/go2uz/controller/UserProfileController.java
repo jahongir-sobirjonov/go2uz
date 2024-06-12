@@ -3,6 +3,8 @@ package uniqueproject.uz.go2uz.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import uniqueproject.uz.go2uz.dto.auth.request.ChangePasswordRequest;
@@ -32,7 +34,14 @@ public class UserProfileController {
         return ResponseEntity.ok(userProfileService.getUserProfile(UUID.fromString(principal.getName())));
     }
 
-    @PutMapping("/update-profile")
+//    @GetMapping("/me2")
+//    public ResponseEntity<?> getUserProfile(@AuthenticationPrincipal UserDetails userDetails) {
+//        return ResponseEntity.ok(userProfileService.getUserProfile(UUID.fromString(userDetails.getUsername())));
+//    }
+
+
+
+    @PatchMapping("/update-profile")
     public ResponseEntity<?> updateUserProfile(@RequestBody UserProfileRequest updatedUser, Principal principal) {
         return ResponseEntity.ok(userProfileService.updateUserProfile(UUID.fromString(principal.getName()), updatedUser));
     }

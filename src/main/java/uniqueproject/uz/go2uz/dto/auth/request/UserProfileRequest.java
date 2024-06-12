@@ -1,5 +1,6 @@
 package uniqueproject.uz.go2uz.dto.auth.request;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 @Getter
@@ -7,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserProfileRequest {
     private String name;
     private String surname;
@@ -15,5 +17,4 @@ public class UserProfileRequest {
     private String phoneNumber;
     private String telegramUsername;
     private String profilePhoto;
-
 }
