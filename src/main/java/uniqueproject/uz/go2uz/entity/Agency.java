@@ -14,8 +14,8 @@ import java.util.UUID;
 
 public class Agency extends BaseEntity {
     private UUID ownerId;
-    @Column(unique = true)
 
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY) //
@@ -30,5 +30,8 @@ public class Agency extends BaseEntity {
 
     private Integer countOfOrders;
     private Integer rating;
+
+    @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY)
+    private List<Notification> notifications;
 }
 
