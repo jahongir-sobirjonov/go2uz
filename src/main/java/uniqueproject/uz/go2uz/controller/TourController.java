@@ -21,14 +21,14 @@ import java.util.UUID;
 @RequestMapping("tours")
 public class TourController {
     private final TourService tourService;
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add-tour")
     public ResponseEntity<TourResponse> addTour(@RequestBody TourRequest tourRequest) {
         TourResponse tourResponse = tourService.addTourToAgency(tourRequest.getAgencyId(), tourRequest);
         return ResponseEntity.status(200).body(tourResponse);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/update-tour")
     public ResponseEntity<String> updateTour(@RequestBody TourUpdateRequest tourUpdateRequest) {
         return ResponseEntity.status(200).body(tourService.updateTour(tourUpdateRequest));
