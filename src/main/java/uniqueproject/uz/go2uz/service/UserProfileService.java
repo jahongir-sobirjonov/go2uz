@@ -44,14 +44,36 @@ public class UserProfileService {
 //            throw new IllegalArgumentException("Invalid current password");
 //        }
 
+        if (profileRequest.getName() != null) {
+            user.setName(profileRequest.getName());
+        }
+        if (profileRequest.getSurname() != null) {
+            user.setSurname(profileRequest.getSurname());
+        }
+        if (profileRequest.getCity() != null) {
+            user.setCity(profileRequest.getCity());
+        }
+        if (profileRequest.getEmail() != null) {
+            user.setEmail(profileRequest.getEmail());
+        }
+        if (profileRequest.getPhoneNumber() != null) {
+            user.setPhoneNumber(profileRequest.getPhoneNumber());
+        }
+        if (profileRequest.getTelegramUsername() != null) {
+            user.setTelegramUsername(profileRequest.getTelegramUsername());
+        }
+        if (profileRequest.getProfilePhoto() != null) {
+            user.setProfilePhoto(profileRequest.getProfilePhoto());
+        }
+
         // Update user profile information
-        user.setName(profileRequest.getName());
-        user.setSurname(profileRequest.getSurname());
-        user.setCity(profileRequest.getCity());
-        user.setEmail(profileRequest.getEmail());
-        user.setPhoneNumber(profileRequest.getPhoneNumber());
-        user.setTelegramUsername(profileRequest.getTelegramUsername());
-        user.setProfilePhoto(profileRequest.getProfilePhoto());
+//        user.setName(profileRequest.getName());
+//        user.setSurname(profileRequest.getSurname());
+//        user.setCity(profileRequest.getCity());
+//        user.setEmail(profileRequest.getEmail());
+//        user.setPhoneNumber(profileRequest.getPhoneNumber());
+//        user.setTelegramUsername(profileRequest.getTelegramUsername());
+//        user.setProfilePhoto(profileRequest.getProfilePhoto());
 
 //        // If a new password is provided, update the password
 //        if (profileRequest.getNewPassword() != null && !profileRequest.getNewPassword().isEmpty()) {
