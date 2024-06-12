@@ -16,13 +16,13 @@ public class ManagerController {
     private ManagerService managerService;
 
 
-     @GetMapping("/orders/{agencyId}")
+     @GetMapping("/orders-by-agency/{agencyId}")
     public ResponseEntity<List<OrderResponse>> getOrdersByAgency(@PathVariable UUID agencyId) {
         List<OrderResponse> orders = managerService.getOrdersByAgency(agencyId);
         return ResponseEntity.ok(orders);
     }
 
-    @PutMapping("/orders/{orderId}/status")
+    @PutMapping("/update-orders/{orderId}/status")
     public ResponseEntity<OrderResponse> updateOrderStatus(
             @PathVariable UUID orderId,
             @RequestParam OrderStatus status) {
