@@ -1,5 +1,6 @@
 package uniqueproject.uz.go2uz.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,9 @@ import uniqueproject.uz.go2uz.repository.TourRepository;
 import uniqueproject.uz.go2uz.repository.UserRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,6 +29,7 @@ public class OrderService {
     private final TourRepository tourRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final NotificationService notificationService;
 
 
 //    public OrderResponse createOrder(OrderRequest orderRequest) {
@@ -76,6 +80,8 @@ public class OrderService {
             order.setNumberOfSeats(orderRequest.getNumberOfSeats());
             order.setUser(user);
             orderRepository.save(order);
+        notificationService.notifyAgency(order);
+
 
         // Update available seats for the trip
         tour.setAvailableSeats(tour.getAvailableSeats() - orderRequest.getNumberOfSeats());
@@ -85,6 +91,31 @@ public class OrderService {
         tourRepository.save(tour);
 
         return "Order successful";
-
     }
+
+
+
+    public OrderResponse updateOrderStatus(UUID orderId, OrderStatus status) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            order.setStatus(status);
+            order.setUpdatedDate(LocalDateTime.now());
+            Order updatedOrder = orderRepository.save(order);
+
+            // Notify the user
+            notificationService.notifyUser(order);
+
+            OrderResponse orderResponse = modelMapper.map(updatedOrder, OrderResponse.class);
+            orderResponse.setUserId(order.getUser().getId());
+            orderResponse.setTourId(order.getTour().getId());
+            return orderResponse;
+        } else {
+            throw new EntityNotFoundException("Order not found");
+        }
+    }
+
+
+
+
 }
