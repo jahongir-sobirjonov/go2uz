@@ -27,6 +27,8 @@ public class Tour extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private TourStatus status;
 
+    private List<String> services;
+
 //    private Integer totalSeats;
     private Integer availableSeats;
 

@@ -6,11 +6,9 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import uniqueproject.uz.go2uz.dto.auth.request.AgencyRequest;
 import uniqueproject.uz.go2uz.dto.auth.response.AgencyResponse;
-import uniqueproject.uz.go2uz.dto.auth.response.TourResponse;
 import uniqueproject.uz.go2uz.entity.Agency;
 import uniqueproject.uz.go2uz.entity.enums.ServiceType;
 import uniqueproject.uz.go2uz.exception.DataAlreadyExistsException;
-import uniqueproject.uz.go2uz.exception.DataNotFoundException;
 import uniqueproject.uz.go2uz.repository.AgencyRepository;
 
 import java.util.List;
