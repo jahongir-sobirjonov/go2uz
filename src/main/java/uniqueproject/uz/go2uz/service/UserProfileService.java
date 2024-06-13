@@ -66,20 +66,6 @@ public class UserProfileService {
             user.setProfilePhoto(profileRequest.getProfilePhoto());
         }
 
-        // Update user profile information
-//        user.setName(profileRequest.getName());
-//        user.setSurname(profileRequest.getSurname());
-//        user.setCity(profileRequest.getCity());
-//        user.setEmail(profileRequest.getEmail());
-//        user.setPhoneNumber(profileRequest.getPhoneNumber());
-//        user.setTelegramUsername(profileRequest.getTelegramUsername());
-//        user.setProfilePhoto(profileRequest.getProfilePhoto());
-
-//        // If a new password is provided, update the password
-//        if (profileRequest.getNewPassword() != null && !profileRequest.getNewPassword().isEmpty()) {
-//            user.setPassword(passwordEncoder.encode(profileRequest.getNewPassword()));
-//        }
-
         // Save the updated user entity
         UserEntity updatedUser = userRepository.save(user);
 
