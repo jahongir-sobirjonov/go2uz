@@ -4,7 +4,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
-import uniqueproject.uz.go2uz.dto.auth.response.TourResponse;
 import uniqueproject.uz.go2uz.entity.Agency;
 import uniqueproject.uz.go2uz.entity.enums.TourCategory;
 import uniqueproject.uz.go2uz.entity.enums.TourStatus;
@@ -25,6 +24,7 @@ public class TourRequest {
     private List<String> pictures; // rasmlar pathi
     private Double cost; // narxi
     private String location;
+    private List<String> services;
     private TourCategory category;
     private TourStatus status;
     private LocalDate startDate;

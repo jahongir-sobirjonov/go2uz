@@ -19,6 +19,7 @@ public class TourResponse {
     private List<String> pictures; // rasmlar pathi
     private Double cost; // narxi
     private String location;
+    private List<String> services;
     private TourCategory category;
     private TourStatus status;
     private String agencyName;
