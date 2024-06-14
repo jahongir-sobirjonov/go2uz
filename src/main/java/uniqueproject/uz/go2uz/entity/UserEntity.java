@@ -3,8 +3,11 @@ package uniqueproject.uz.go2uz.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import org.apache.catalina.User;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import uniqueproject.uz.go2uz.entity.enums.UserRole;
 
