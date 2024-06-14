@@ -32,31 +32,6 @@ public class OrderService {
     private final NotificationService notificationService;
 
 
-//    public OrderResponse createOrder(OrderRequest orderRequest) {
-//        UserEntity user = userRepository.findById(orderRequest.getUserId())
-//                .orElseThrow(() -> new DataNotFoundException("User not found"));
-//
-//        Tour tour = tourRepository.findById(orderRequest.getTourId())
-//                .orElseThrow(() -> new DataNotFoundException("Tour not found"));
-//
-//        Order order = Order.builder()
-//                .user(user)
-//                .tour(tour)
-//                .status(OrderStatus.PENDING)
-//                .orderDate(new Date())
-//                .build();
-//
-//        Order savedOrder = orderRepository.save(order);
-//
-//        return OrderResponse.builder()
-//                .id(savedOrder.getId())
-//                .userId(savedOrder.getUser().getId())
-//                .tourId(savedOrder.getTour().getId())
-//                .status(savedOrder.getStatus())
-//                .orderDate(savedOrder.getOrderDate())
-//                .build();
-//    }
-
     public String orderTour(OrderRequest orderRequest) {
         Tour tour = tourRepository.findById(orderRequest.getTourId())
                 .orElseThrow(() -> new DataNotFoundException("Tour not found with id: " + orderRequest.getTourId()));
@@ -78,8 +53,9 @@ public class OrderService {
             order.setStatus(OrderStatus.PENDING);
             order.setOrderDate(LocalDate.now());
             order.setNumberOfSeats(orderRequest.getNumberOfSeats());
+            order.setPhoneNumber(orderRequest.getPhoneNumber());
+        orderRepository.save(order);
             order.setUser(user);
-            orderRepository.save(order);
         notificationService.notifyAgency(order);
 
 
@@ -109,6 +85,8 @@ public class OrderService {
             OrderResponse orderResponse = modelMapper.map(updatedOrder, OrderResponse.class);
             orderResponse.setUserId(order.getUser().getId());
             orderResponse.setTourId(order.getTour().getId());
+            orderResponse.setStatus(status);
+            orderResponse.setPhoneNumber(order.getPhoneNumber());
             return orderResponse;
         } else {
             throw new EntityNotFoundException("Order not found");
