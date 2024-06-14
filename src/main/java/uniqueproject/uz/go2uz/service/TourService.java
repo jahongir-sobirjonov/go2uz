@@ -8,8 +8,10 @@ import uniqueproject.uz.go2uz.dto.auth.request.FilterToursRequest;
 import uniqueproject.uz.go2uz.dto.auth.request.TourRequest;
 import uniqueproject.uz.go2uz.dto.auth.request.TourSpecification;
 import uniqueproject.uz.go2uz.dto.auth.request.TourUpdateRequest;
+import uniqueproject.uz.go2uz.dto.auth.response.ReviewResponse;
 import uniqueproject.uz.go2uz.dto.auth.response.TourResponse;
 import uniqueproject.uz.go2uz.entity.Agency;
+import uniqueproject.uz.go2uz.entity.Review;
 import uniqueproject.uz.go2uz.entity.Tour;
 import uniqueproject.uz.go2uz.repository.AgencyRepository;
 import uniqueproject.uz.go2uz.repository.TourRepository;
@@ -135,13 +137,22 @@ public class TourService {
                 .pictures(tour.getPictures())
                 .cost(tour.getCost())
                 .location(tour.getLocation())
-                .services(tour.getServices())
                 .category(tour.getCategory())
                 .status(tour.getStatus())
                 .agencyName(tour.getAgency().getName())
                 .startDate(tour.getStartDate())
                 .endDate(tour.getEndDate())
                 .availableSeats(tour.getAvailableSeats())
+                .services(tour.getServices())
+                .cancellationPolicy(tour.getCancellationPolicy())
+                .reviews(tour.getReviews().stream().map(this::convertReviewToDto).collect(Collectors.toList()))
+                .build();
+    }
+
+    private ReviewResponse convertReviewToDto(Review review) {
+        return ReviewResponse.builder()
+                .authorName(review.getAuthor().getName())
+                .content(review.getContent())
                 .build();
     }
 
