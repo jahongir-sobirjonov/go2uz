@@ -12,5 +12,6 @@ import java.util.UUID;
 public class OrderRequest {
     private UUID userId;
     private UUID tourId;
+    private String phoneNumber;
     private Integer NumberOfSeats;
 }

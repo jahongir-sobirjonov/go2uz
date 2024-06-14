@@ -26,6 +26,8 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    private String phoneNumber;
+
     private Integer numberOfSeats;
 
     private LocalDate orderDate;
