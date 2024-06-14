@@ -20,15 +20,16 @@ import java.util.List;
 public class TourRequest {
     private UUID agencyId;
     private String title;
-    private String description; //  joy haqida description
-    private List<String> pictures; // rasmlar pathi
-    private Double cost; // narxi
+    private String description;
+    private List<String> pictures;
+    private Double cost;
     private String location;
-    private List<String> services;
     private TourCategory category;
     private TourStatus status;
     private LocalDate startDate;
     private LocalDate endDate;
     private Integer availableSeats;
+    private List<String> services;
+    private String cancellationPolicy;
 
 }
