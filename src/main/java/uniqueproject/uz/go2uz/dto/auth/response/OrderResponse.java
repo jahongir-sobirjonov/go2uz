@@ -14,6 +14,7 @@ public class OrderResponse {
     private UUID id;
     private UUID userId;
     private UUID tourId;
+    private String phoneNumber;
     private OrderStatus status;
     private LocalDate orderDate;
 }
