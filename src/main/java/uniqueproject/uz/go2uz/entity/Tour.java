@@ -28,6 +28,12 @@ public class Tour extends BaseEntity {
     private TourStatus status;
 
     private List<String> services;
+    @Column(length = 2000)
+
+    private String cancellationPolicy; // Cancellation policy
+
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> reviews; // Customer reviews
 
 //    private Integer totalSeats;
     private Integer availableSeats;
