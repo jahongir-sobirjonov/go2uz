@@ -54,8 +54,8 @@ public class OrderService {
             order.setOrderDate(LocalDate.now());
             order.setNumberOfSeats(orderRequest.getNumberOfSeats());
             order.setPhoneNumber(orderRequest.getPhoneNumber());
-        orderRepository.save(order);
             order.setUser(user);
+        orderRepository.save(order);
         notificationService.notifyAgency(order);
 
 
