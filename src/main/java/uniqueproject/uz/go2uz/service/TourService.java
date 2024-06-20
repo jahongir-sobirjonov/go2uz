@@ -16,7 +16,6 @@ import uniqueproject.uz.go2uz.entity.Tour;
 import uniqueproject.uz.go2uz.repository.AgencyRepository;
 import uniqueproject.uz.go2uz.repository.TourRepository;
 import org.springframework.data.jpa.domain.Specification;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -46,9 +45,9 @@ public class TourService {
                 .title(tourRequest.getTitle())
                 .pictures(tourRequest.getPictures())
                 .build();
-       tourRepository.save(newTour);
-       agency.getTours().add(newTour);
-       agencyRepository.save(agency);
+        tourRepository.save(newTour);
+        agency.getTours().add(newTour);
+        agencyRepository.save(agency);
 
         TourResponse tourResponse = modelMapper.map(newTour, TourResponse.class);
         tourResponse.setAgencyName(agency.getName());
@@ -97,25 +96,11 @@ public class TourService {
             tour.setTitle(tourUpdateRequest.getTitle());
         }
 
-
-//        tour.setAvailableSeats(tourUpdateRequest.getAvailableSeats());
-//        tour.setCategory(tourUpdateRequest.getCategory());
-//        tour.setCost(tourUpdateRequest.getCost());
-//        tour.setDescription(tourUpdateRequest.getDescription());
-//        tour.setEndDate(tourUpdateRequest.getEndDate());
-//        tour.setLocation(tourUpdateRequest.getLocation());
-//        tour.setServices(tourUpdateRequest.getServices());
-//        tour.setPictures(tourUpdateRequest.getPictures());
-//        tour.setStartDate(tourUpdateRequest.getStartDate());
-//        tour.setStatus(tourUpdateRequest.getStatus());
-//        tour.setTitle(tourUpdateRequest.getTitle());
         tour.setUpdatedDate(LocalDateTime.now());
         tourRepository.save(tour);
 
         return "Tour updated successfully";
     }
-
-
 
 
     public List<TourResponse> filterTours(FilterToursRequest filterRequest) {
@@ -156,4 +141,10 @@ public class TourService {
                 .build();
     }
 
+    public String delete(UUID tourId) {
+        Tour tour = tourRepository.findById(tourId)
+                .orElseThrow(() -> new EntityNotFoundException("Tour not found with id: " + tourId));
+        tourRepository.delete(tour);
+        return "Tour deleted successfully";
+    }
 }
