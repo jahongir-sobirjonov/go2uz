@@ -45,4 +45,10 @@ public class TourController {
         return ResponseEntity.ok(tours);
     }
 
+    @DeleteMapping("/delete-tour{tourId}")
+    public ResponseEntity<String> deleteTour(@PathVariable UUID tourId) {
+        return ResponseEntity.status(200).body(tourService.delete(tourId));
+
+    }
+
 }
