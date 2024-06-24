@@ -1,7 +1,5 @@
-package uniqueproject.uz.go2uz.dto.auth.response;
+package uniqueproject.uz.go2uz.dto.response;
 
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
 import lombok.*;
 import uniqueproject.uz.go2uz.entity.enums.ServiceType;
 
