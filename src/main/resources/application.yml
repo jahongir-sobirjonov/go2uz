@@ -28,6 +28,11 @@ spring:
           starttls:
             enable: true
 
+payment:
+  provider:
+    url: https://api.paymentprovider.com/payment
+    token: YOUR_ACCESS_TOKEN
+
 springdoc:
   api-docs:
     enabled: true
