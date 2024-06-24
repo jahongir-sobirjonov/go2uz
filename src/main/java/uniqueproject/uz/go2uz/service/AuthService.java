@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import uniqueproject.uz.go2uz.config.security.JwtResponse;
 import uniqueproject.uz.go2uz.config.security.JwtService;
 import uniqueproject.uz.go2uz.dto.auth.SignUp;
-import uniqueproject.uz.go2uz.dto.auth.response.AuthDto;
+import uniqueproject.uz.go2uz.dto.response.AuthDto;
 import uniqueproject.uz.go2uz.entity.UserEntity;
 import uniqueproject.uz.go2uz.entity.UserType;
 import uniqueproject.uz.go2uz.entity.enums.UserRole;
