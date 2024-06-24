@@ -1,4 +1,4 @@
-package uniqueproject.uz.go2uz.dto.auth.request;
+package uniqueproject.uz.go2uz.dto.request;
 
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;

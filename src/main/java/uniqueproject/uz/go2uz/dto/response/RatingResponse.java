@@ -1,4 +1,4 @@
-package uniqueproject.uz.go2uz.dto.auth.response;
+package uniqueproject.uz.go2uz.dto.response;
 
 import lombok.*;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package uniqueproject.uz.go2uz.dto.auth.response;
+package uniqueproject.uz.go2uz.dto.response;
 import lombok.*;
 import uniqueproject.uz.go2uz.entity.enums.OrderStatus;
 
@@ -17,4 +17,10 @@ public class OrderResponse {
     private String phoneNumber;
     private OrderStatus status;
     private LocalDate orderDate;
+    private UUID orderId;
+    private Integer numberOfSeats;
+    private Double totalCost;
+//    private String url;
+
+
 }

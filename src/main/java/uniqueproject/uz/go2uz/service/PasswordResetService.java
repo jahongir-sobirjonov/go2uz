@@ -3,7 +3,7 @@ package uniqueproject.uz.go2uz.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import uniqueproject.uz.go2uz.dto.auth.request.PasswordResetToken;
+import uniqueproject.uz.go2uz.dto.request.PasswordResetToken;
 import uniqueproject.uz.go2uz.entity.UserEntity;
 import uniqueproject.uz.go2uz.exception.DataNotFoundException;
 import uniqueproject.uz.go2uz.repository.PasswordResetTokenRepository;

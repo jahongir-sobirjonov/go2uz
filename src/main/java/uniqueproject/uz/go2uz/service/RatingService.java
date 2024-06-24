@@ -2,8 +2,8 @@ package uniqueproject.uz.go2uz.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uniqueproject.uz.go2uz.dto.auth.request.RatingRequest;
-import uniqueproject.uz.go2uz.dto.auth.response.RatingResponse;
+import uniqueproject.uz.go2uz.dto.request.RatingRequest;
+import uniqueproject.uz.go2uz.dto.response.RatingResponse;
 import uniqueproject.uz.go2uz.entity.Rating;
 import uniqueproject.uz.go2uz.entity.Tour;
 import uniqueproject.uz.go2uz.entity.UserEntity;
@@ -12,7 +12,6 @@ import uniqueproject.uz.go2uz.repository.RatingRepository;
 import uniqueproject.uz.go2uz.repository.TourRepository;
 import uniqueproject.uz.go2uz.repository.UserRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

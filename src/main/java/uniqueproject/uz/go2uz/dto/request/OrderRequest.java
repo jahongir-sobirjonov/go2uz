@@ -1,4 +1,4 @@
-package uniqueproject.uz.go2uz.dto.auth.request;
+package uniqueproject.uz.go2uz.dto.request;
 
 import lombok.*;
 
@@ -14,4 +14,7 @@ public class OrderRequest {
     private UUID tourId;
     private String phoneNumber;
     private Integer NumberOfSeats;
+//    private String paymentMethod;
+    private String url; // Added field for URL if needed
+
 }

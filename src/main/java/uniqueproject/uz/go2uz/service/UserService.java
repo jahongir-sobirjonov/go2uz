@@ -3,15 +3,9 @@ package uniqueproject.uz.go2uz.service;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import uniqueproject.uz.go2uz.dto.auth.SignUp;
-import uniqueproject.uz.go2uz.dto.auth.response.OrderResponse;
-import uniqueproject.uz.go2uz.dto.auth.response.UserResponse;
-import uniqueproject.uz.go2uz.entity.Order;
+import uniqueproject.uz.go2uz.dto.response.UserResponse;
 import uniqueproject.uz.go2uz.entity.UserEntity;
-import uniqueproject.uz.go2uz.entity.UserType;
-import uniqueproject.uz.go2uz.entity.enums.OrderStatus;
 import uniqueproject.uz.go2uz.entity.enums.UserRole;
-import uniqueproject.uz.go2uz.exception.DataAlreadyExistsException;
 import uniqueproject.uz.go2uz.exception.DataNotFoundException;
 import uniqueproject.uz.go2uz.repository.UserRepository;
 

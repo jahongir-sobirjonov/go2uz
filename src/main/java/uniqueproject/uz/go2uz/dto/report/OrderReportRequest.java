@@ -1,4 +1,4 @@
-package uniqueproject.uz.go2uz.dto.auth.report;
+package uniqueproject.uz.go2uz.dto.report;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -15,7 +15,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
-import uniqueproject.uz.go2uz.dto.auth.report.OrderReportRequest;
+import uniqueproject.uz.go2uz.dto.report.OrderReportRequest;
 import uniqueproject.uz.go2uz.entity.Order;
 import uniqueproject.uz.go2uz.entity.enums.ReportFormat;
 import uniqueproject.uz.go2uz.repository.OrderRepository;
@@ -63,6 +63,7 @@ public class ReportService {
             // Add title to the PDF document
             document.add(new Paragraph("Order Reports:"));
             document.add(new Paragraph("This reports generated on: " + LocalDate.now()));
+            document.add(new Paragraph("scan to view full details"));
             document.add(new Paragraph("----------"));
 
             // Generate and add QR code for each order
@@ -72,16 +73,21 @@ public class ReportService {
                 document.add(new Paragraph("Tours: " + order.getTour().getTitle()));
                 document.add(new Paragraph("Booking Status: " + order.getStatus()));
                 document.add(new Paragraph("Order Date: " + order.getOrderDate().format(DateTimeFormatter.ISO_LOCAL_DATE)));
-                document.add(new Paragraph("----------"));
+                document.add(new Paragraph("-------------- scan me --------------"));
 
                 // QR code content
                 String qrContent = "Order ID: " + order.getId() +
                         "\nUser: " + order.getUser().getName() + " " + order.getUser().getSurname() +
+                        "\nPhone Number: " + order.getPhoneNumber() +
                         "\nAgency: " + order.getTour().getAgency().getName() +
                         "\nTour: " + order.getTour().getTitle() +
                         "\nBooking Status: " + order.getStatus() +
-                        "\nOrder Date: " + order.getOrderDate().format(DateTimeFormatter.ISO_LOCAL_DATE) +
-                        "\nPhone Number: " + order.getPhoneNumber();
+                        "\nNumber of seats: " + order.getNumberOfSeats() +
+//                        "\nTotal cost: " + order.getTotalCost() +
+//                        "\nPayment type: " + order.getUrl() + // url kim orqali to'lov qilgani(Visa, Uzcard, Click...)
+                        "\nTotal cost: " + (order.getTotalCost() != null ? order.getTotalCost() : "N/A") +
+                        "\nPayment type: " + (order.getUrl() != null ? order.getUrl() : "N/A") +
+                        "\nOrder Date: " + order.getOrderDate().format(DateTimeFormatter.ISO_LOCAL_DATE) ;
 
                 BufferedImage qrImage = generateQRCodeImage(qrContent);
 

@@ -2,17 +2,14 @@ package uniqueproject.uz.go2uz.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uniqueproject.uz.go2uz.dto.auth.request.FilterToursRequest;
-import uniqueproject.uz.go2uz.dto.auth.request.OrderRequest;
-import uniqueproject.uz.go2uz.dto.auth.request.TourRequest;
-import uniqueproject.uz.go2uz.dto.auth.request.TourUpdateRequest;
-import uniqueproject.uz.go2uz.dto.auth.response.TourResponse;
-import uniqueproject.uz.go2uz.entity.Tour;
+import uniqueproject.uz.go2uz.dto.request.FilterToursRequest;
+import uniqueproject.uz.go2uz.dto.request.TourRequest;
+import uniqueproject.uz.go2uz.dto.request.TourUpdateRequest;
+import uniqueproject.uz.go2uz.dto.response.TourResponse;
 import uniqueproject.uz.go2uz.service.TourService;
 
 import java.util.List;
@@ -49,6 +46,11 @@ public class TourController {
     public ResponseEntity<String> deleteTour(@PathVariable UUID tourId) {
         return ResponseEntity.status(200).body(tourService.delete(tourId));
 
+    }
+
+    @GetMapping("/get-tour{tourId}")
+    public ResponseEntity<TourResponse> getTour(@PathVariable UUID tourId) {
+        return ResponseEntity.ok(tourService.getTour(tourId));
     }
 
 }

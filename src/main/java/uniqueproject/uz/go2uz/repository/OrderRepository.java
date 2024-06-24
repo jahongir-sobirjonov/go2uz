@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import uniqueproject.uz.go2uz.dto.response.OrderResponse;
 import uniqueproject.uz.go2uz.entity.Order;
 
 import java.time.LocalDate;
@@ -23,4 +24,6 @@ public interface OrderRepository extends JpaRepository<Order, UUID> {
             @Param("travelTypes") List<String> travelTypes,
             @Param("bookingStatuses") List<String> bookingStatuses);
 
+    List<Order> findByUserId(UUID userId);
+    List<Order> findByTourId(UUID tourId);
 }

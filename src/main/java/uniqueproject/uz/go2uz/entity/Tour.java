@@ -42,4 +42,5 @@ public class Tour extends BaseEntity {
     @JoinColumn(name = "agency_id")
     private Agency agency;
 
+
 }

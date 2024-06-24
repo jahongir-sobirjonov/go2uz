@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uniqueproject.uz.go2uz.dto.auth.report.OrderReportRequest;
+import uniqueproject.uz.go2uz.dto.report.OrderReportRequest;
 import uniqueproject.uz.go2uz.entity.enums.ReportFormat;
 import uniqueproject.uz.go2uz.service.ReportService;
 

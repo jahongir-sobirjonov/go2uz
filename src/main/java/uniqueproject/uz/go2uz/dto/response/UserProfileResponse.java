@@ -1,15 +1,16 @@
-package uniqueproject.uz.go2uz.dto.auth.request;
+package uniqueproject.uz.go2uz.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+
+import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserProfileRequest {
+public class UserProfileResponse {
+    private UUID id;
     private String name;
     private String surname;
     private String city;

@@ -2,8 +2,8 @@ package uniqueproject.uz.go2uz.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uniqueproject.uz.go2uz.dto.auth.request.ReviewRequest;
-import uniqueproject.uz.go2uz.dto.auth.response.ReviewResponse;
+import uniqueproject.uz.go2uz.dto.request.ReviewRequest;
+import uniqueproject.uz.go2uz.dto.response.ReviewResponse;
 import uniqueproject.uz.go2uz.entity.Review;
 import uniqueproject.uz.go2uz.entity.Tour;
 import uniqueproject.uz.go2uz.entity.UserEntity;

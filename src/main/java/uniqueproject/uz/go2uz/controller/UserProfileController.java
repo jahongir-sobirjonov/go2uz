@@ -3,13 +3,9 @@ package uniqueproject.uz.go2uz.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import uniqueproject.uz.go2uz.dto.auth.request.ChangePasswordRequest;
-import uniqueproject.uz.go2uz.dto.auth.request.UserProfileRequest;
-import uniqueproject.uz.go2uz.entity.UserEntity;
+import uniqueproject.uz.go2uz.dto.request.UserProfileRequest;
 import uniqueproject.uz.go2uz.repository.UserRepository;
 import uniqueproject.uz.go2uz.service.UserProfileService;
 import uniqueproject.uz.go2uz.service.UserService;

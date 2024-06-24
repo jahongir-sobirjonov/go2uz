@@ -4,12 +4,12 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import uniqueproject.uz.go2uz.dto.auth.request.FilterToursRequest;
-import uniqueproject.uz.go2uz.dto.auth.request.TourRequest;
-import uniqueproject.uz.go2uz.dto.auth.request.TourSpecification;
-import uniqueproject.uz.go2uz.dto.auth.request.TourUpdateRequest;
-import uniqueproject.uz.go2uz.dto.auth.response.ReviewResponse;
-import uniqueproject.uz.go2uz.dto.auth.response.TourResponse;
+import uniqueproject.uz.go2uz.dto.request.FilterToursRequest;
+import uniqueproject.uz.go2uz.dto.request.TourRequest;
+import uniqueproject.uz.go2uz.dto.request.TourSpecification;
+import uniqueproject.uz.go2uz.dto.request.TourUpdateRequest;
+import uniqueproject.uz.go2uz.dto.response.ReviewResponse;
+import uniqueproject.uz.go2uz.dto.response.TourResponse;
 import uniqueproject.uz.go2uz.entity.Agency;
 import uniqueproject.uz.go2uz.entity.Review;
 import uniqueproject.uz.go2uz.entity.Tour;
@@ -136,6 +136,7 @@ public class TourService {
 
     private ReviewResponse convertReviewToDto(Review review) {
         return ReviewResponse.builder()
+                .id(review.getId())
                 .authorName(review.getAuthor().getName())
                 .content(review.getContent())
                 .build();
@@ -146,5 +147,14 @@ public class TourService {
                 .orElseThrow(() -> new EntityNotFoundException("Tour not found with id: " + tourId));
         tourRepository.delete(tour);
         return "Tour deleted successfully";
+    }
+
+    public TourResponse getTour(UUID tourId) {
+        Tour tour = tourRepository.findById(tourId)
+                .orElseThrow(() -> new EntityNotFoundException("Tour not found with id: " + tourId));
+        TourResponse tourResponse = modelMapper.map(tour, TourResponse.class);
+        tourResponse.setId(tour.getId());
+        tourResponse.setAgencyName(tour.getAgency().getName());
+        return tourResponse;
     }
 }
