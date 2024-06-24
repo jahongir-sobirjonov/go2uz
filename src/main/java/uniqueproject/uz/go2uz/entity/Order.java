@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 import uniqueproject.uz.go2uz.entity.enums.OrderStatus;
+import uniqueproject.uz.go2uz.forpayment.payme.Transaction;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -31,4 +32,10 @@ public class Order extends BaseEntity {
     private Integer numberOfSeats;
 
     private LocalDate orderDate;
+
+//    private Integer seatsBooked;
+    private Double totalCost;
+
+    private String url;
 }
+

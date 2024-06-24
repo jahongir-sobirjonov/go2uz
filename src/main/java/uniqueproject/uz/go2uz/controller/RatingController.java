@@ -2,11 +2,10 @@ package uniqueproject.uz.go2uz.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uniqueproject.uz.go2uz.dto.auth.request.RatingRequest;
-import uniqueproject.uz.go2uz.dto.auth.response.RatingResponse;
+import uniqueproject.uz.go2uz.dto.request.RatingRequest;
+import uniqueproject.uz.go2uz.dto.response.RatingResponse;
 import uniqueproject.uz.go2uz.service.RatingService;
 
 import java.security.Principal;

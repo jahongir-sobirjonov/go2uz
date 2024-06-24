@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import uniqueproject.uz.go2uz.dto.auth.request.PasswordResetRequest;
-import uniqueproject.uz.go2uz.dto.auth.response.PasswordResetDto;
+import uniqueproject.uz.go2uz.dto.request.PasswordResetRequest;
+import uniqueproject.uz.go2uz.dto.response.PasswordResetDto;
 import uniqueproject.uz.go2uz.service.PasswordResetService;
 
 @RestController

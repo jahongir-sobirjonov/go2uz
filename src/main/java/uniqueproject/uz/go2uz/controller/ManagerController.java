@@ -3,7 +3,7 @@ package uniqueproject.uz.go2uz.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uniqueproject.uz.go2uz.dto.auth.response.OrderResponse;
+import uniqueproject.uz.go2uz.dto.response.OrderResponse;
 import uniqueproject.uz.go2uz.entity.enums.OrderStatus;
 import uniqueproject.uz.go2uz.service.ManagerService;
 

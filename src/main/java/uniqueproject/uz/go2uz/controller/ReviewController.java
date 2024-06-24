@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uniqueproject.uz.go2uz.dto.auth.request.ReviewRequest;
-import uniqueproject.uz.go2uz.dto.auth.response.ReviewResponse;
+import uniqueproject.uz.go2uz.dto.request.ReviewRequest;
+import uniqueproject.uz.go2uz.dto.response.ReviewResponse;
 import uniqueproject.uz.go2uz.service.ReviewService;
 
 import java.security.Principal;

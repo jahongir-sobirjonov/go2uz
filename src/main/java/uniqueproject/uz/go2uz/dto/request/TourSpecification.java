@@ -1,4 +1,4 @@
-package uniqueproject.uz.go2uz.dto.auth.request;
+package uniqueproject.uz.go2uz.dto.request;
 
 import org.springframework.data.jpa.domain.Specification;
 import uniqueproject.uz.go2uz.entity.Tour;

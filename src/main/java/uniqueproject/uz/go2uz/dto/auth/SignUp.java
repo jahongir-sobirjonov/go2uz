@@ -8,9 +8,9 @@ import lombok.*;
 @Setter
 @Builder
 public class SignUp {
-    private String email;
-    private String password;
     private String name;
     private String surname;
     private String phoneNumber;
+    private String email;
+    private String password;
 }

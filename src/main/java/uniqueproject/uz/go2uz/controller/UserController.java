@@ -3,11 +3,9 @@ package uniqueproject.uz.go2uz.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
-import uniqueproject.uz.go2uz.dto.auth.response.UserResponse;
-import uniqueproject.uz.go2uz.entity.UserEntity;
+import uniqueproject.uz.go2uz.dto.response.UserResponse;
 import uniqueproject.uz.go2uz.entity.enums.UserRole;
 import uniqueproject.uz.go2uz.service.UserService;
 
