@@ -1,15 +1,12 @@
 package uniqueproject.uz.go2uz.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
-import uniqueproject.uz.go2uz.dto.auth.request.AgencyRequest;
-import uniqueproject.uz.go2uz.dto.auth.response.AgencyResponse;
+import uniqueproject.uz.go2uz.dto.request.AgencyRequest;
+import uniqueproject.uz.go2uz.dto.response.AgencyResponse;
 import uniqueproject.uz.go2uz.entity.Agency;
 import uniqueproject.uz.go2uz.entity.enums.ServiceType;
 import uniqueproject.uz.go2uz.service.AgencyService;
