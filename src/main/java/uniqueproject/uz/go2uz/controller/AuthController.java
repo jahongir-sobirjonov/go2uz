@@ -6,15 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uniqueproject.uz.go2uz.config.security.JwtResponse;
-import uniqueproject.uz.go2uz.dto.auth.SignIn;
 import uniqueproject.uz.go2uz.dto.auth.SignUp;
-import uniqueproject.uz.go2uz.dto.auth.response.AuthDto;
-import uniqueproject.uz.go2uz.dto.auth.response.UserResponse;
+import uniqueproject.uz.go2uz.dto.response.AuthDto;
 import uniqueproject.uz.go2uz.entity.UserType;
 import uniqueproject.uz.go2uz.service.AuthService;
 import uniqueproject.uz.go2uz.service.UserService;
-
-import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
