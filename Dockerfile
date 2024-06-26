@@ -74,16 +74,49 @@
 #
 # Build stage
 #
-FROM gradle:7.4.2-jdk17 AS build
-WORKDIR /app
-COPY --chown=gradle:gradle . /app/
-RUN gradle clean build
 
-#
-# Package stage
-#
-FROM openjdk:17-alpine
+
+
+
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:22-jdk-alpine
+
+# Set the working directory in the container
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar /app/app.jar
+
+# Copy the executable JAR file into the container
+COPY build/libs/go2uz-1.jar app.jar
+
+# Expose the port that the application will run on
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+
+# Define the command to run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#FROM gradle:7.4.2-jdk17 AS build
+#WORKDIR /app
+#COPY --chown=gradle:gradle . /app/
+#RUN gradle clean build
+#
+##
+## Package stage
+##
+#FROM openjdk:17-alpine
+#WORKDIR /app
+#COPY --from=build /app/build/libs/*.jar /app/app.jar
+#EXPOSE 8080
+#ENTRYPOINT ["java","-jar","app.jar"]
