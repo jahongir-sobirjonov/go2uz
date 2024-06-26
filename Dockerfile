@@ -23,7 +23,7 @@ COPY . .
 RUN gradle clean build -x test
 
 # Use a lightweight image to run the application
-FROM openjdk:19.0.2-jdk-slim
-COPY --from=build /home/gradle/build/libs/demo-0.0.1-SNAPSHOT.jar demo.jar
+FROM openjdk:22-jdk-slim
+COPY --from=build /build/libs/go2uz-1.jar app.jar
 EXPOSE 8080
-CMD ["java", "-jar", "demo.jar"]
+CMD ["java", "-jar", "app.jar"]
