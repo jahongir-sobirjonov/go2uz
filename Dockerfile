@@ -29,8 +29,7 @@
 #CMD ["java", "-jar", "app.jar"]
 
 
-# Use AdoptOpenJDK's OpenJDK 17 base image
-#FROM adoptopenjdk:19-jdk-hotspot
+# Use OpenJDK 19 base image
 FROM openjdk:19-jdk
 
 # Set working directory inside the container
@@ -43,6 +42,9 @@ COPY gradle/ ./gradle/
 # Copy the entire source tree
 COPY src ./src
 
+# Grant execute permissions to Gradle wrapper
+RUN chmod +x ./gradlew
+
 # Build application using Gradle
 RUN ./gradlew build -x test
 
@@ -51,4 +53,5 @@ EXPOSE 8080
 
 # Run the Spring Boot application when the container starts
 CMD ["java", "-jar", "build/libs/go2uz.jar"]
+
 
