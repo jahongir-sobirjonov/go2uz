@@ -30,7 +30,8 @@
 
 
 # Use AdoptOpenJDK's OpenJDK 17 base image
-FROM adoptopenjdk:19-jdk-hotspot
+#FROM adoptopenjdk:19-jdk-hotspot
+FROM openjdk:19-jdk
 
 # Set working directory inside the container
 WORKDIR /app
