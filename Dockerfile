@@ -54,20 +54,36 @@
 #
 ## Run the Spring Boot application when the container starts
 #ENTRYPOINT ["java", "-jar", "build/libs/go2uz.jar"]
+#
+#
+#FROM ubuntu:latest AS build
+#
+#RUN apt-get update
+#RUN apt-get install openjdk-17-jdk -y
+#COPY . .
+#
+#RUN ./gradlew bootJar --no-daemon
+#
+#FROM openjdk:17-jdk-slim
+#
+#EXPOSE 8080
+#
+#COPY --from=build /build/libs/go2uz-1.jar-1.jar go2uz.jar
+#
+#ENTRYPOINT ["java", "-jar", "go2uz.jar"]
+#
+# Build stage
+#
+FROM gradle:7.4.2-jdk17 AS build
+WORKDIR /app
+COPY --chown=gradle:gradle . /app/
+RUN gradle clean build
 
-
-FROM ubuntu:latest AS build
-
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-COPY . .
-
-RUN ./gradlew bootJar --no-daemon
-
-FROM openjdk:17-jdk-slim
-
+#
+# Package stage
+#
+FROM openjdk:17-alpine
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar /app/app.jar
 EXPOSE 8080
-
-COPY --from=build /build/libs/go2uz-1.jar-1.jar go2uz.jar
-
-ENTRYPOINT ["java", "-jar", "go2uz.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
