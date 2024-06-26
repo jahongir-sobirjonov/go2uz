@@ -31,29 +31,43 @@
 
 # Use OpenJDK 19 base image
 # Use OpenJDK 19 base image
-FROM openjdk:19-jdk
+#FROM openjdk:19-jdk
+#
+## Set working directory inside the container
+#WORKDIR /app
+#
+## Copy Gradle build files
+#COPY build.gradle settings.gradle gradlew ./
+#COPY gradle/ ./gradle/
+#
+## Copy the entire source tree
+#COPY src ./src
+#
+## Grant execute permissions to Gradle wrapper
+#RUN chmod +x ./gradlew
+#
+## Build application using Gradle
+#RUN ./gradlew build -x test || true   # Use '|| true' to ignore errors temporarily
+#
+## Expose port 8080
+#EXPOSE 8080
+#
+## Run the Spring Boot application when the container starts
+#ENTRYPOINT ["java", "-jar", "build/libs/go2uz.jar"]
 
-# Set working directory inside the container
-WORKDIR /app
 
-# Copy Gradle build files
-COPY build.gradle settings.gradle gradlew ./
-COPY gradle/ ./gradle/
+FROM ubuntu:latest AS build
 
-# Copy the entire source tree
-COPY src ./src
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+COPY . .
 
-# Grant execute permissions to Gradle wrapper
-RUN chmod +x ./gradlew
+RUN ./gradlew bootJar --no-daemon
 
-# Build application using Gradle
-RUN ./gradlew build -x test || true   # Use '|| true' to ignore errors temporarily
+FROM openjdk:17-jdk-slim
 
-# Expose port 8080
 EXPOSE 8080
 
-# Run the Spring Boot application when the container starts
-ENTRYPOINT ["java", "-jar", "build/libs/go2uz.jar"]
+COPY --from=build /build/libs/go2uz-1.jar-1.jar go2uz.jar
 
-
-
+ENTRYPOINT ["java", "-jar", "go2uz.jar"]
