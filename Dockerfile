@@ -60,14 +60,14 @@ FROM ubuntu:latest AS build
 
 RUN apt-get update
 RUN apt-get install openjdk-17-jdk -y
-#COPY . .
+COPY . .
 
-#RUN ./gradlew bootJar --no-daemon
+RUN ./gradlew bootJar --no-daemon
 
-#COPY --from=build /build/libs/go2uz-1.jar-1.jar go2uz.jar
+FROM openjdk:17-jdk-slim
 
-#ENTRYPOINT ["java", "-jar", "go2uz.jar"]
-
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
 EXPOSE 8080
+
+COPY --from=build /build/libs/go2uz-1.jar-1.jar go2uz.jar
+
+ENTRYPOINT ["java", "-jar", "go2uz.jar"]
