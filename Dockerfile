@@ -53,7 +53,7 @@ RUN ./gradlew build -x test || true   # Use '|| true' to ignore errors temporari
 EXPOSE 8080
 
 # Run the Spring Boot application when the container starts
-CMD ["java", "-jar", "build/libs/go2uz-1.jar"]
+ENTRYPOINT ["java", "-jar", "build/libs/go2uz-1.jar"]
 
 
 
