@@ -13,8 +13,8 @@ spring:
         show_sql: true
         format_sql: true
 
-  mongodb:
-    uri: mongodb://localhost:27017/chat_db
+#  mongodb:
+#    uri: mongodb://localhost:27017/chat_db
 
   mail:
     host: smtp.gmail.com

@@ -18,12 +18,36 @@
 #
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 # Use Gradle to build the project
-FROM gradle:7.3.3-jdk17 AS build
-COPY . .
-RUN gradle clean build -x test
+#FROM gradle:7.3.3-jdk17 AS build
+#COPY . .
+#RUN gradle clean build -x test
+#
+## Use a lightweight image to run the application
+#FROM openjdk:22-jdk-slim
+#COPY --from=build /build/libs/go2uz-1.jar app.jar
+#EXPOSE 8080
+#CMD ["java", "-jar", "app.jar"]
 
-# Use a lightweight image to run the application
-FROM openjdk:22-jdk-slim
-COPY --from=build /build/libs/go2uz-1.jar app.jar
+
+# Use AdoptOpenJDK's OpenJDK 17 base image
+FROM adoptopenjdk:17-jdk-hotspot
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy Gradle build files
+COPY build.gradle settings.gradle gradlew ./
+COPY gradle/ ./gradle/
+
+# Copy the entire source tree
+COPY src ./src
+
+# Build application using Gradle
+RUN ./gradlew build -x test
+
+# Expose port 8080
 EXPOSE 8080
-CMD ["java", "-jar", "app.jar"]
+
+# Run the Spring Boot application when the container starts
+CMD ["java", "-jar", "build/libs/go2uz.jar"]
+
