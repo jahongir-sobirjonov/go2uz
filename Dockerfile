@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine
+FROM adoptopenjdk/openjdk18:alpine
 
 WORKDIR /app
 
