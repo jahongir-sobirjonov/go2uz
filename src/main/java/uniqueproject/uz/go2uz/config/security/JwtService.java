@@ -17,23 +17,35 @@ import java.util.Map;
 @Service
 public class JwtService {
 
-    @Value("${jwt.expiry}")
-    private Integer expiry;
+    @Value("${jwt.access-expiry}")
+    private Integer accessExpiry;
+
+    @Value("${jwt.refresh-expiry}")
+    private Integer refreshExpiry;
 
     @Value("${jwt.secret}")
     private String secret;
 
-    public String generateToken(UserEntity user) {
+    public String generateAccessToken(UserEntity user) {
         Date iat = new Date();
         return Jwts.builder()
                 .setSubject(user.getId().toString())
                 .setIssuedAt(iat)
-                .setExpiration(new Date(iat.getTime() + expiry))
+                .setExpiration(new Date(iat.getTime() + accessExpiry))
                 .addClaims(getAuthorities(user))
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
     }
 
+    public String generateRefreshToken(UserEntity user) {
+        Date iat = new Date();
+        return Jwts.builder()
+                .setSubject(user.getId().toString())
+                .setIssuedAt(iat)
+                .setExpiration(new Date(iat.getTime() + refreshExpiry))
+                .signWith(Keys.hmacShaKeyFor(secret.getBytes()), SignatureAlgorithm.HS256)
+                .compact();
+    }
 
     public Jws<Claims> extractToken(String token) {
         return Jwts.parserBuilder()
@@ -41,10 +53,6 @@ public class JwtService {
                 .build()
                 .parseClaimsJws(token);
     }
-
-
-
-
 
     public Map<String, Object> getAuthorities(UserEntity user) {
         return Map.of("roles",

@@ -17,18 +17,12 @@ import uniqueproject.uz.go2uz.service.UserService;
 @RequestMapping("auth")
 public class AuthController {
     private final AuthService authService;
-    private final UserService userService;
+
     @PermitAll
     @PostMapping("/sign-up")
     public ResponseEntity<String> signUp(@RequestBody SignUp signUp, UserType userType){
         return ResponseEntity.ok().body(authService.addUser(signUp, userType));
     }
-
-//    @GetMapping("/me")
-//    public ResponseEntity<UserResponse> me(Principal principal){
-//
-//        return ResponseEntity.ok(userService.me(principal));
-//    }
 
     @PermitAll
     @PostMapping("/sign-in")
@@ -36,4 +30,10 @@ public class AuthController {
         return authService.signIn(dto);
     }
 
+    @PermitAll
+    @PostMapping("/refresh")
+    public JwtResponse refresh(@RequestBody String refreshToken) {
+        return authService.refreshToken(refreshToken);
+    }
 }
+
