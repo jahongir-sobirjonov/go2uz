@@ -1,5 +1,7 @@
 package uniqueproject.uz.go2uz.service;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +19,8 @@ import uniqueproject.uz.go2uz.exception.DataNotFoundException;
 import uniqueproject.uz.go2uz.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 
+import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -27,39 +31,42 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     private AuthenticationManager authenticationManager;
-//    private JwtTokenProvider tokenProvider;
-
 
     public String addUser(SignUp signUp, UserType userType) {
         if (userRepository.existsByEmail(signUp.getEmail())) {
             throw new DataAlreadyExistsException("This email already exists: " + signUp.getEmail());
         }
 
-        // Map SignUp to UserEntity
         UserEntity user = modelMapper.map(signUp, UserEntity.class);
-
-        // Hash the password
         user.setPassword(passwordEncoder.encode(signUp.getPassword()));
-
-        // Set user type and role
         user.setUserType(userType);
         user.setRole(UserRole.USER);
-
-        // Save the user to the repository
         userRepository.save(user);
 
         return "User successfully registered";
     }
-
 
     public JwtResponse signIn(AuthDto dto) {
         UserEntity user = userRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
 
         if (passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
-            return new JwtResponse(jwtService.generateToken(user));
+            String accessToken = jwtService.generateAccessToken(user);
+            String refreshToken = jwtService.generateRefreshToken(user);
+            return new JwtResponse(accessToken, refreshToken);
         } else {
             throw new AuthenticationCredentialsNotFoundException("Invalid credentials");
         }
+    }
+
+    public JwtResponse refreshToken(String refreshToken) {
+        Jws<Claims> claimsJws = jwtService.extractToken(refreshToken);
+        String userId = claimsJws.getBody().getSubject();
+        UserEntity user = userRepository.findById(UUID.fromString(userId))
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+
+        String newAccessToken = jwtService.generateAccessToken(user);
+        String newRefreshToken = jwtService.generateRefreshToken(user);
+        return new JwtResponse(newAccessToken, newRefreshToken);
     }
 }
