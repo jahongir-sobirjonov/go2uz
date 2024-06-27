@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/go2uz
-    username: postgres
-    password: 1
+    username: go2uz_user
+    password: go2uz_password
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
